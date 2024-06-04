@@ -1,0 +1,9 @@
+<tree string="Actividades" sample="1">
+                <field name="sequence" widget="handle" field_id="sequence_0"/>
+                <field name="name" field_id="name_0"/>
+                <field name="summary" field_id="summary_0"/>
+                <field name="delay_label" string="Planeado en" class="text-end" field_id="delay_label_0"/>
+                <field name="delay_from" string="Tipo" field_id="delay_from_0"/>
+                <field name="res_model" on_change="1" field_id="res_model_0"/>
+                <field name="icon" field_id="icon_0"/>
+            </tree>
