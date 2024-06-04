@@ -1,0 +1,70 @@
+<kanban default_group_by="stage_id" class="o_kanban_small_column o_opportunity_kanban" on_create="quick_create" quick_create_view="crm.quick_create_opportunity_form" archivable="false" sample="1" js_class="crm_kanban">
+	                    <field name="stage_id" options="{&quot;group_by_tooltip&quot;: {&quot;requirements&quot;: &quot;Description&quot;}}" on_change="1" field_id="stage_id_0"/>
+	                    <field name="probability" field_id="probability_0"/>
+	                    <field name="color" field_id="color_0"/>
+	                    <field name="priority" field_id="priority_0"/>
+	                    <field name="expected_revenue" field_id="expected_revenue_0"/>
+	                    <field name="activity_date_deadline" field_id="activity_date_deadline_0"/>
+	                    <field name="user_id" on_change="1" field_id="user_id_0"/>
+	                    <field name="partner_id" on_change="1" field_id="partner_id_0"/>
+	                    <field name="activity_summary" field_id="activity_summary_0"/>
+	                    <field name="active" field_id="active_0"/>
+	                    <field name="company_currency" field_id="company_currency_0"/>
+	                    <field name="activity_state" field_id="activity_state_0"/>
+	                    <field name="activity_ids" on_change="1" field_id="activity_ids_0"/>
+	                    <field name="recurring_revenue_monthly" field_id="recurring_revenue_monthly_0"/>
+	                    <field name="team_id" on_change="1" field_id="team_id_0"/>
+	                    <progressbar/>
+	                    <templates>
+	                        <t t-name="kanban-menu">
+	                            <t t-if="widget.editable"><a role="menuitem" type="edit" class="dropdown-item">Editar</a></t>
+	                            <t t-if="widget.deletable"><a role="menuitem" type="delete" class="dropdown-item">Eliminar</a></t>
+	                            <ul class="oe_kanban_colorpicker" data-field="color"/>
+	                        </t>
+	                        <t t-name="kanban-box">
+	                            <t t-set="lost_ribbon" t-value="!record.active.raw_value and record.probability and record.probability.raw_value == 0"/>
+	                            <div t-attf-class="#{!selection_mode ? kanban_color(record.color.raw_value) : ''} #{lost_ribbon ? 'oe_kanban_card_ribbon' : ''} oe_kanban_global_click oe_kanban_card d-flex flex-column">
+	                                <div class="ribbon ribbon-top-right" invisible="probability &gt; 0 or active">
+	                                    <span class="text-bg-danger">Perdidos</span>
+	                                </div>
+	
+	                                <div class="oe_kanban_content flex-grow-1">
+	                                    <div class="oe_kanban_details">
+	                                        <strong class="o_kanban_record_title"><field name="name" field_id="name_0"/></strong>
+	                                    </div>
+	                                    <div class="o_kanban_record_subtitle">
+	                                        <t t-if="record.expected_revenue.raw_value">
+	                                            <field name="expected_revenue" widget="monetary" options="{'currency_field': 'company_currency'}" field_id="expected_revenue_1"/>
+	                                            </t>
+	                                        <t t-if="record.recurring_revenue and record.recurring_revenue.raw_value">
+	                                            </t>
+	                                    </div>
+	                                    <div>
+	                                        <span class="o_text_overflow" t-if="record.partner_id.value" t-esc="record.partner_id.value"/>
+	                                    </div>
+	                                    <div>
+	                                        <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" field_id="tag_ids_0"/>
+	                                    </div>
+	                                    <div>
+	                                        <field name="lead_properties" widget="properties" field_id="lead_properties_0"/>
+	                                    </div>
+	                                </div>
+	                                <div class="oe_kanban_footer">
+	                                    <div class="o_kanban_record_bottom">
+	                                        <div class="oe_kanban_bottom_left">
+	                                            <field name="priority" widget="priority" field_id="priority_1"/>
+	                                            <field name="activity_ids" widget="kanban_activity" on_change="1" field_id="activity_ids_1"/>
+	                                        </div>
+	                                        <div class="oe_kanban_bottom_right">
+	                                            <field name="user_id" widget="many2one_avatar_user" domain="[('share', '=', False)]" on_change="1" field_id="user_id_1"/>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                                <div class="clearfix"/>
+	                            </div>
+	                        </t>
+	                    </templates>
+	                <header>
+	                    <button name="action_generate_leads" type="object" class="o_button_generate_leads" string="Generar leads" display="always" invisible="context.get('active_model', 'crm.lead') != 'crm.lead'"/>
+	                </header>
+	                </kanban>
