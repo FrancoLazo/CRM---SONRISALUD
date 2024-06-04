@@ -1,0 +1,6 @@
+<tree string="Etapas" multi_edit="1">
+                <field name="sequence" widget="handle" field_id="sequence_0"/>
+                <field name="name" readonly="1" field_id="name_0"/>
+                <field name="is_won" field_id="is_won_0"/>
+                <field name="team_id" can_create="True" can_write="True" field_id="team_id_0"/>
+            </tree>
