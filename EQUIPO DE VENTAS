@@ -1,0 +1,7 @@
+<tree string="Equipo de ventas" sample="1" multi_edit="1">
+                <field name="sequence" widget="handle" field_id="sequence_0"/>
+                <field name="name" readonly="1" field_id="name_0"/>
+                    <field string="Seudónimo" name="alias_id" can_create="True" can_write="True" field_id="alias_id_0"/>
+                <field name="active" column_invisible="True" field_id="active_0"/>
+                <field name="user_id" domain="[('share', '=', False)]" widget="many2one_avatar_user" can_create="True" can_write="True" field_id="user_id_0"/>
+                </tree>
