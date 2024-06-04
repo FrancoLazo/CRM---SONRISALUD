@@ -1,0 +1,133 @@
+<kanban class="o_kanban_dashboard o_crm_team_kanban" create="0" sample="1">
+                <field name="name" field_id="name_0"/>
+                <field name="user_id" field_id="user_id_0"/>
+                <field name="member_ids" widget="many2many_tags" field_id="member_ids_0"/>
+                <field name="color" field_id="color_0"/>
+                <field name="currency_id" field_id="currency_id_0"/>
+                <field name="is_favorite" field_id="is_favorite_0"/>
+                        <field name="alias_id" on_change="1" field_id="alias_id_0"/>
+                        <field name="alias_name" on_change="1" field_id="alias_name_0"/>
+                        <field name="alias_domain" field_id="alias_domain_0"/>
+                        <field name="use_opportunities" on_change="1" field_id="use_opportunities_0"/>
+                        <field name="use_leads" on_change="1" field_id="use_leads_0"/>
+                <templates>
+                    <t t-name="kanban-menu">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-4 o_kanban_card_manage_section o_kanban_manage_view">
+                                    <h5 role="menuitem" class=" o_kanban_card_manage_title">
+                                        <span>Ver</span>
+                                    </h5>
+                        <div t-if="record.use_opportunities.raw_value">
+                            <a name="217" type="action">
+                                Oportunidades
+                            </a>
+                        </div>
+                                </div>
+                                <div class="col-4 o_kanban_card_manage_section o_kanban_manage_new">
+                                    <h5 role="menuitem" class="o_kanban_card_manage_title">
+                                        <span>Nuevo</span>
+                                    </h5>
+                        <div t-if="record.use_opportunities.raw_value">
+                            <a name="221" type="action">
+                                Oportunidad
+                            </a>
+                        </div>
+                                </div>
+                                <div class="col-4 o_kanban_card_manage_section o_kanban_manage_reports">
+                                    <h5 role="menuitem" class="o_kanban_card_manage_title">
+                                        <span>Reportes</span>
+                                    </h5>
+                        <div t-if="record.use_opportunities.raw_value">
+                            <a name="220" type="action">
+                                Oportunidades
+                            </a>
+                        </div>
+                                    <div name="o_team_kanban_report_separator"/>
+                        <div t-if="record.use_opportunities.raw_value">
+                            <a name="213" type="action">
+                                Actividades
+                            </a>
+                        </div>
+                                </div>
+                            </div>
+
+                            <div t-if="widget.editable" class="o_kanban_card_manage_settings row">
+                                <div role="menuitem" aria-haspopup="true" class="col-8">
+                                    <ul class="oe_kanban_colorpicker" data-field="color" role="menu"/>
+                                </div>
+                                <div role="menuitem" class="col-4">
+                                    <a class="dropdown-item" type="edit">Configuración</a>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="#{!selection_mode ? kanban_color(record.color.raw_value) : ''}">
+                            <div t-attf-class="o_kanban_card_header">
+                                <div class="o_kanban_card_header_title">
+                                    <div class="o_primary o_text_overflow"><field name="name" field_id="name_1"/></div>
+                        <div t-if="record.alias_name.value and record.alias_domain.value">
+                            <span t-translation="off"><i class="fa fa-envelope-o" aria-label="Leads" title="Leads" role="img"/>  <field name="alias_id" on_change="1" field_id="alias_id_1"/></span>
+                        </div>
+                                </div>
+                            </div>
+                            <div class="container o_kanban_card_content">
+                                <div class="row o_kanban_card_upper_content">
+                                    <div class="col-4 o_kanban_primary_left" name="to_replace_in_sale_crm">
+                                        <button type="object" class="btn btn-primary" name="action_primary_channel_button"><field name="dashboard_button_name" field_id="dashboard_button_name_0"/></button>
+                                    </div>
+                                    <div class="col-8 o_kanban_primary_right" style="padding-bottom:0;">
+                                        <t name="first_options"/>
+                        <div class="row" t-if="record.lead_unassigned_count.raw_value">
+                            <div class="col-8">
+                                <a name="216" type="action" context="{'search_default_unassigned_leads': 1}">
+                                    <field name="lead_unassigned_count" class="me-1" field_id="lead_unassigned_count_0"/>
+                                    <t t-if="record.lead_unassigned_count.raw_value == 1">Lead sin asignar</t>
+                                    <t t-else="">Leads sin asignar</t>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row" t-if="record.opportunities_count.raw_value">
+                            <div class="col-8">
+                                <a name="217" type="action" context="{'search_default_open_opportunities': True}"> <!-- context="{'search_default_probability': NOT or < 100}" -->
+                                    <field name="opportunities_count" class="me-1" field_id="opportunities_count_0"/>
+                                    <t t-if="record.opportunities_count.raw_value == 1">Oportunidad abierta</t>
+                                    <t t-else="">Oportunidades abiertas</t>
+                                </a>
+                            </div>
+                            <div class="col-4 text-end text-truncate">
+                                <field name="opportunities_amount" widget="monetary" options="{'currency_field': 'currency_id'}" field_id="opportunities_amount_0"/>
+                            </div>
+                        </div>
+                        <div class="row" t-if="record.opportunities_overdue_count.raw_value">
+                            <div class="col-8">
+                                <a name="218" type="action">
+                                    <field name="opportunities_overdue_count" class="me-1" field_id="opportunities_overdue_count_0"/>
+                                    <t t-if="record.opportunities_overdue_count.raw_value == 1">Oportunidad vencidas</t>
+                                    <t t-else="">Oportunidades vencidas</t>
+                                </a>
+                            </div>
+                             <div class="col-4 text-end text-truncate">
+                                <field name="opportunities_overdue_amount" widget="monetary" options="{'currency_field': 'currency_id'}" field_id="opportunities_overdue_amount_0"/>
+                            </div>
+                        </div>
+                                        <t name="second_options"/>
+                                        <t name="third_options"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 o_kanban_primary_bottom">
+                                        <t t-call="SalesTeamDashboardGraph"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                    <t t-name="SalesTeamDashboardGraph">
+                        <div t-if="record.dashboard_graph_data.raw_value" class="o_sales_team_kanban_graph_section">
+                            <field name="dashboard_graph_data" widget="dashboard_graph" t-att-graph_type="'bar'" field_id="dashboard_graph_data_0"/>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
