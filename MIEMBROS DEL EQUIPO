@@ -1,0 +1,31 @@
+<kanban quick_create="false" group_create="0" records_draggable="0" sample="1" default_group_by="crm_team_id" class="o_crm_team_member_kanban">
+                <field name="user_id" on_change="1" field_id="user_id_0"/>
+                <field name="active" field_id="active_0"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_card oe_kanban_global_click">
+                            <div class="ribbon ribbon-top-right" invisible="active">
+                                <span class="text-bg-danger">Archivado</span>
+                            </div>
+                            <div class="o_kanban_card_content d-flex">
+                                <div>
+                                    <img t-att-src="kanban_image('res.users', 'avatar_128', record.user_id.raw_value)" class="o_kanban_image o_image_64_cover" alt="Avatar"/>
+                                </div>
+                                <div class="oe_kanban_details d-flex flex-column ms-3">
+                                    <strong class="o_kanban_record_title oe_partner_heading"><field name="user_id" on_change="1" field_id="user_id_1"/></strong>
+                                    <a type="open" class="nav-link p-0"><field name="crm_team_id" on_change="1" field_id="crm_team_id_0"/></a>
+                                    <div class="d-flex align-items-baseline text-break">
+                                        <i class="fa fa-envelope me-1" role="img" aria-label="Correo electrónico" title="Correo electrónico"/><field name="email" field_id="email_0"/>
+                                    </div>
+                                </div>
+                <field name="assignment_enabled" invisible="1" field_id="assignment_enabled_0"/>
+                <field name="assignment_optout" invisible="1" field_id="assignment_optout_0"/>
+                <div class="o_member_assignment" invisible="not assignment_enabled or assignment_optout">
+                    <field name="assignment_max" invisible="1" field_id="assignment_max_0"/>
+                    <field name="lead_month_count" widget="gauge" options="{'max_field': 'assignment_max'}" invisible="assignment_max == 0" field_id="lead_month_count_0"/>
+                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
